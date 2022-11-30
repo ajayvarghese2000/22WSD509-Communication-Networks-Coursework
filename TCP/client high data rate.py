@@ -5,12 +5,13 @@ PORT = 65432  # The port used by the server
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
 
-    s.settimeout(2)
+    #s.settimeout(10)
     s.connect((HOST, PORT))
     
-    # Send Hello World to the server
-    s.send(b"Hello")
-    s.send(b"World")
+    # Send Hello World to the server in a loop for 1000000 times
+    for i in range(1000000):
+        s.sendall(b"Hello")
+        s.sendall(b"World")
 
     while True:  
         data = s.recv(1024)

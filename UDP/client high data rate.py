@@ -8,12 +8,14 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     s.settimeout(2)
     s.connect((HOST, PORT))
     
-    # Send Hello World to the server
-    s.send(b"Hello")
-    s.send(b"World")
+    # Send Hello World to the server in a loop for 1000000 times
+    for i in range(1000000):
+        s.sendall(b"Hello")
+        s.sendall(b"World")
     
     while True:  
-        data = s.recv(1024)
+
+        data = s.recv(65507)
 
         data = data.decode("utf-8")
 
